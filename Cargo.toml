@@ -1,7 +1,20 @@
 [package]
 name = "ahref"
-version = "0.1.0"
+authors = ["tenqz"]
+version = "0.1.1"
 edition = "2021"
+rust-version = "1.72.0"
+repository = "https://github.com/tenqz/ahref"
+readme = "README.md"
+keywords = ["html", "scrapper", "link", "a", "href"]
+
+[lib]
+name = "ahref"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ahref"
+path = "src/main.rs"
 
 [dependencies]
 lazy_static = "1.4.0"
