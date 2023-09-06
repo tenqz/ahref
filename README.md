@@ -10,7 +10,7 @@ cargo add ahref
 
 ### Usage
 
-Here's an example of how to use Ahref:
+Here's an example of how to use Ahref lib:
 
 ```rust
 use ahref::get_a_tags;

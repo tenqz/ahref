@@ -1,5 +1,5 @@
-use std::env;
 use ahref::get_a_tags;
+use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
