@@ -2,7 +2,7 @@
 name = "ahref"
 description = "Extract 'a' tags from html page"
 authors = ["tenqz"]
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 rust-version = "1.72.0"
 repository = "https://github.com/tenqz/ahref"
