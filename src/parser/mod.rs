@@ -2,32 +2,38 @@ pub mod parser {
     use lazy_static::lazy_static;
     use regex::Regex;
 
-    pub struct Parser {}
+    pub struct Parser {
+        html: String,
+    }
 
     impl Parser {
-        pub fn get_a_tags(html: &String) -> Vec<String> {
+        pub fn new(html: String) -> Self {
+            Parser { html }
+        }
+
+        pub fn parse_tags(&mut self) -> Vec<String> {
             lazy_static! {
                 static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
             }
 
             HTML_TAG_A_REGEX
-                .find_iter(&html)
+                .find_iter(&self.html)
                 .map(|x| x.as_str().to_string())
                 .collect()
         }
 
-        pub fn get_url_from_tags(tags: Vec<String>) -> Vec<String> {
+        pub fn parse_links(&mut self) -> Vec<String> {
             let mut links = Vec::new();
 
-            for tag in tags {
-                let url = Parser::convert_a_href_to_url(tag);
+            for tag in self.parse_tags() {
+                let url = self.convert_a_href_to_url(tag);
                 links.push(url.to_string());
             }
 
             links
         }
 
-        fn convert_a_href_to_url(tag_a: String) -> String {
+        fn convert_a_href_to_url(&mut self, tag_a: String) -> String {
             let regex_string = "href='.+'|href=\".+\"";
             let regex_link = Regex::new(regex_string).unwrap();
 
