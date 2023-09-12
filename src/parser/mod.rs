@@ -2,14 +2,13 @@ pub mod parser {
     use lazy_static::lazy_static;
     use regex::Regex;
 
-    pub struct Parser {
-    }
+    pub struct Parser {}
 
     impl Parser {
         pub fn get_a_tags(html: &String) -> Vec<String> {
             lazy_static! {
-        static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
-    }
+                static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
+            }
 
             HTML_TAG_A_REGEX
                 .find_iter(&html)
@@ -28,7 +27,7 @@ pub mod parser {
             links
         }
 
-        fn convert_a_href_to_url(tag_a: String)-> String {
+        fn convert_a_href_to_url(tag_a: String) -> String {
             let regex_string = "href='.+'|href=\".+\"";
             let regex_link = Regex::new(regex_string).unwrap();
 
@@ -48,4 +47,3 @@ pub mod parser {
         }
     }
 }
-
