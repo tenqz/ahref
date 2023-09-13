@@ -2,7 +2,7 @@
 name = "ahref"
 description = "Extract 'a' tags from html page"
 authors = ["tenqz"]
-version = "0.2.2"
+version = "0.2.3"
 edition = "2021"
 rust-version = "1.72.0"
 repository = "https://github.com/tenqz/ahref"
@@ -10,7 +10,14 @@ readme = "README.md"
 keywords = ["cli", "web", "parser", "parse", "html"]
 categories = ["Parser implementations", "Parsing tools", "Web programming"]
 license = "MIT"
-
+include = [
+"Cargo.lock",
+"Cargo.toml",
+"/src/**",
+"/tests/**",
+"README.md",
+]
+documentation = "https://docs.rs/ahref"
 
 [lib]
 name = "ahref"
