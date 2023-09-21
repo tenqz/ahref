@@ -1,5 +1,6 @@
 mod parser;
-pub use crate::parser::parser::Parser;
+
+use crate::parser::Parser;
 
 /// Extract html 'a' tag from page
 /// # Examples
