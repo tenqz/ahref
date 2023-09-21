@@ -12,8 +12,8 @@ impl Parser {
 
     pub fn parse_tags(&mut self) -> Vec<String> {
         lazy_static! {
-                static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
-            }
+            static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
+        }
 
         HTML_TAG_A_REGEX
             .find_iter(&self.html)
