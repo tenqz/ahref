@@ -1,9 +1,11 @@
-use ahref::get_a_tags;
+use ahref::parser::Parser;
 use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let html = &args[1];
 
-    println!("{:?}", get_a_tags(html.to_string()));
+    let mut parser = Parser::new(html.to_string());
+
+    println!("{:?}", parser.parse_tags());
 }
