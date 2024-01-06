@@ -1,5 +1,5 @@
-use lazy_static::lazy_static;
 use regex::Regex;
+use tagparser;
 
 pub struct Parser {
     html: String,
@@ -11,14 +11,7 @@ impl Parser {
     }
 
     pub fn parse_tags(&mut self) -> Vec<String> {
-        lazy_static! {
-            static ref HTML_TAG_A_REGEX: Regex = Regex::new(r"<a.*?>.*?<\/a.*?>").unwrap();
-        }
-
-        HTML_TAG_A_REGEX
-            .find_iter(&self.html)
-            .map(|x| x.as_str().to_string())
-            .collect()
+        tagparser::parse_tags(self.html.clone(), "a".to_string())
     }
 
     pub fn parse_links(&mut self) -> Vec<String> {

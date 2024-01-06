@@ -2,7 +2,7 @@
 name = "ahref"
 description = "Extract 'a' tags from html page"
 authors = ["tenqz"]
-version = "0.2.7"
+version = "0.2.8"
 edition = "2021"
 rust-version = "1.72.0"
 repository = "https://github.com/tenqz/ahref"
@@ -28,5 +28,5 @@ name = "ahref"
 path = "src/main.rs"
 
 [dependencies]
-lazy_static = "1.4.0"
 regex = "1.9.5"
+tagparser = "0.1.0"
