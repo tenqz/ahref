@@ -18,16 +18,17 @@ impl Parser {
         let mut links = Vec::new();
 
         for tag in self.parse_tags() {
-            let url = self.convert_a_href_to_url(tag);
-            links.push(url.to_string());
+            if self.create_regex().is_match(&tag) {
+                let url = self.convert_a_href_to_url(tag);
+                links.push(url.to_string());
+            }
         }
 
         links
     }
 
     fn convert_a_href_to_url(&mut self, tag_a: String) -> String {
-        let regex_string = "href='.+'|href=\".+\"";
-        let regex_link = Regex::new(regex_string).unwrap();
+        let regex_link = self.create_regex();
 
         let mut url = regex_link
             .find(&tag_a)
@@ -42,5 +43,11 @@ impl Parser {
         url.replace_range(offset.., "");
 
         url
+    }
+
+    fn create_regex(&self) -> Regex {
+        let regex_string = "href='.+'|href=\".+\"";
+
+        Regex::new(regex_string).unwrap()
     }
 }
