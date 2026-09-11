@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — Unreleased
+## 1.0.0 — 2026-09-12
 
 - Replace the positional HTML CLI with `crawl`, `analyze` and `export` commands.
 - Add bounded async HTML crawling, sitemap/index/gzip support and default robots handling.
@@ -14,5 +14,4 @@
 - Add deterministic fixture tests, CI, release instructions and community documents.
 
 Breaking changes: CLI syntax, Rust 1.90 minimum, and HTML tag serialization formatting.
-Existing 0.3 helper names remain available. Crates.io publication and a release tag are
-separate maintainer actions; this entry is not evidence of a published release.
+Existing 0.3 helper names remain available. GitHub release tags and crates.io publication are separate distribution steps.
