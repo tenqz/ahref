@@ -31,7 +31,7 @@ ahref crawl https://example.com/sitemap.xml --output graph.json
 ahref crawl https://example.com --format graphml --output site.graphml
 ```
 
-A bare hostname uses HTTPS. A sitemap index or `.xml.gz` sitemap is also accepted. Sitemap mode crawls the origin homepage first, then additional sitemap components. Pages known only from sitemap have `depth: null` until reached through links.
+A bare hostname uses HTTPS. A sitemap index or `.xml.gz` sitemap is also accepted. Sitemap URLs and the origin homepage enter the initial queue together and are fetched with bounded concurrency. Links found in their HTML can discover additional pages outside the sitemap. `--max-pages` limits the whole crawl; `--max-depth` limits link following from each seed. Being a seed does not imply depth zero: pages known only from sitemap have `depth: null` until reached through links from the homepage.
 
 Use this graph for internal linking analysis, orphan candidate detection, site architecture visualization, internal PageRank, broken link discovery and further graph analysis.
 
