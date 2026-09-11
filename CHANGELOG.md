@@ -4,6 +4,8 @@
 
 - Replace the positional HTML CLI with `crawl`, `analyze` and `export` commands.
 - Add bounded async HTML crawling, sitemap/index/gzip support and default robots handling.
+- Start sitemap URLs together in the initial crawl queue, then discover additional pages
+  through HTML hyperlinks without inventing zero-depth paths for sitemap-only pages.
 - Preserve directed hyperlinks with anchor and rel metadata, HTTP outcomes and redirects.
 - Add distinct-neighbor degree, root depth, orphan/weak-link candidates, dead ends,
   checked broken links and internal PageRank.
