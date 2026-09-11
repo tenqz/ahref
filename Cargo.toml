@@ -1,32 +1,28 @@
 [package]
 name = "ahref"
-description = "Extract 'a' tags from html page"
+description = "A Rust CLI crawler that turns a website into a directed link graph"
 authors = ["tenqz"]
-version = "0.3.0"
+version = "1.0.0"
 edition = "2021"
-rust-version = "1.72.0"
+rust-version = "1.90"
 repository = "https://github.com/tenqz/ahref"
 readme = "README.md"
-keywords = ["cli", "web", "parser", "parse", "html"]
-categories = ["parsing", "web-programming", "command-line-utilities"]
+keywords = ["cli", "crawler", "graph", "links", "html"]
+categories = ["command-line-utilities", "web-programming"]
 license = "MIT"
-include = [
-"Cargo.lock",
-"Cargo.toml",
-"/src/**",
-"/tests/**",
-"README.md",
-]
-documentation = "https://docs.rs/ahref"
-
-[lib]
-name = "ahref"
-path = "src/lib.rs"
-
-[[bin]]
-name = "ahref"
-path = "src/main.rs"
+include = ["Cargo.lock", "Cargo.toml", "src/**", "tests/**", "README.md", "CHANGELOG.md", "LICENSE", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md", "docs/**"]
 
 [dependencies]
-regex = "1.9.5"
-tagparser = "0.2.0"
+clap = { version = "4.5", features = ["derive"] }
+encoding_rs = "0.8"
+flate2 = "1"
+futures-util = "0.3"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "gzip", "brotli", "deflate", "stream"] }
+robotstxt = "0.3"
+roxmltree = "0.20"
+scraper = "0.24"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "sync", "net", "io-util"] }
+url = { version = "2.5", features = ["serde"] }
