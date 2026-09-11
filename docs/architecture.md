@@ -38,9 +38,12 @@ resources and external destinations are never scheduled. Redirects are fetched m
 so a redirect cannot silently escape scope or bypass robots. Redirect chains stop after
 ten followed hops, and visited identities stop cycles.
 
-The homepage component is crawled before additional sitemap seeds. Queue depth for a
-sitemap-only component measures local crawl budget; it is not presented as root depth.
-Final root depth is recomputed with a 0–1 breadth-first traversal of hyperlinks/redirects.
+The homepage and all accepted sitemap URLs are queued together at seed depth zero.
+They share the initial bounded fetch wave and the global page request budget; discovered
+hyperlinks can extend the queue beyond the sitemap. Duplicate URLs still receive one
+request. Queue depth measures distance from the nearest seed for crawl-budget purposes;
+it is not presented as root depth. Final root depth is recomputed with a 0–1 breadth-first
+traversal of hyperlinks/redirects, so a sitemap-only orphan remains unreachable.
 
 ## Analysis choices
 
