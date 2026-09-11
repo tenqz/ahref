@@ -1,2 +1,8 @@
-/target
-/.idea
+/target/
+.env
+.env.*
+!.env.example
+/graph.json
+/site.graphml
+/site.dot
+/site.svg

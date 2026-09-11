@@ -1,0 +1,23 @@
+name: Bug report
+description: Report a reproducible crawler, graph or export problem
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version and platform
+      description: Output of ahref --version and your operating system
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Command and minimal HTML/sitemap fixture. Remove private URLs and credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
