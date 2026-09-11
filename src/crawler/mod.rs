@@ -71,23 +71,14 @@ pub async fn crawl(input: &str, options: CrawlOptions) -> Result<Graph> {
     };
     // Sorted breadth-first waves give deterministic scheduling independent of response timing.
     let mut frontier = BTreeMap::from([(root.to_string(), (0usize, 0usize))]);
+    // Sitemap membership supplies seeds, not zero-depth hyperlink paths.
+    // Queue them immediately so they share the first bounded fetch wave.
+    for url in sitemap_seeds {
+        frontier.insert(url, (0, 0));
+    }
     let mut edges = Vec::new();
     let mut requests = 0;
-    let mut seeded = false;
-    loop {
-        if frontier.is_empty() {
-            if seeded {
-                break;
-            }
-            seeded = true;
-            // Additional sitemap components are crawl seeds, not zero-depth graph roots.
-            for url in &sitemap_seeds {
-                frontier.insert(url.clone(), (0, 0));
-            }
-            if frontier.is_empty() {
-                break;
-            }
-        }
+    while !frontier.is_empty() {
         let min_depth = frontier.values().map(|v| v.0).min().unwrap_or(0);
         let keys: Vec<_> = frontier
             .iter()

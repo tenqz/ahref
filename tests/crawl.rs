@@ -500,3 +500,33 @@ async fn cli_stdout_is_machine_readable_and_options_are_validated() {
     std::fs::remove_file(&analyzed).unwrap();
     std::fs::remove_dir(&directory).unwrap();
 }
+
+#[tokio::test]
+async fn sitemap_urls_start_together_before_following_discovered_links() {
+    let server = Server::start(false).await;
+    let graph = crawl(
+        &format!("{}/pages.xml", server.root),
+        CrawlOptions {
+            max_pages: 3,
+            concurrency: 3,
+            ..Default::default()
+        },
+    )
+    .await
+    .unwrap();
+
+    // The budget fits exactly the homepage and two sitemap URLs. Following the
+    // homepage's component first would consume it before reaching the orphan.
+    assert_eq!(node(&graph, "/orphan").status_code, Some(200));
+    assert_eq!(node(&graph, "/a").status_code, Some(200));
+    assert_eq!(server.hits("/"), 1);
+    assert_eq!(server.hits("/a"), 1);
+    assert_eq!(server.hits("/orphan"), 1);
+    assert_eq!(server.hits("/b?q=1"), 0);
+    assert_eq!(graph.site.summary.fetched_pages, 3);
+
+    // Seed scheduling must not invent root reachability or zero-depth pages.
+    assert_eq!(node(&graph, "/a").depth, Some(1));
+    assert_eq!(node(&graph, "/orphan").depth, None);
+    assert_eq!(graph.site.summary.orphan_pages, 1);
+}
