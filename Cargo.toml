@@ -20,7 +20,7 @@ futures-util = "0.3"
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "gzip", "brotli", "deflate", "stream"] }
 robotstxt = "0.3"
 roxmltree = "0.20"
-scraper = "0.24"
+scraper = "0.27"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
